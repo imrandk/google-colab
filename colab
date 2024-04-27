@@ -35,4 +35,4 @@ async function downloadAndRepeat() {
 downloadAndRepeat();
 
 // Set up a timer to repeat the process after a certain interval (e.g., 10 seconds)
-setInterval(downloadAndRepeat, 5000); // Repeat every 5 seconds
+setInterval(downloadAndRepeat, 10000); // Repeat every 5 seconds
