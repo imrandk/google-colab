@@ -1,0 +1,38 @@
+let previousImageUrl = ''; // Variable to store the previous image URL
+
+async function downloadAndRepeat() {
+  // Click the first button
+  document.getElementById('component-4').click();
+  
+  // Wait for a while (adjust the time as needed)
+  await new Promise(resolve => setTimeout(resolve, 5000)); // Wait for 5 seconds
+  
+  // Get the source of the image
+  const imageUrl = document.querySelector('img.svelte-1btp92j:nth-child(1)').src;
+  
+  // Check if the current image URL is the same as the previous one
+  if (imageUrl === previousImageUrl) {
+    console.log('Same image as previous. Skipping download.');
+    return; // Skip the rest of the function
+  }
+  
+  // Update the previous image URL
+  previousImageUrl = imageUrl;
+  
+  // Generate a random number to use as part of the file name
+  const randomNumber = Math.floor(Math.random() * 1000000); // Change the range as needed
+  
+  // Create a dummy anchor element to trigger the download
+  const downloadLink = document.createElement('a');
+  downloadLink.href = imageUrl;
+  downloadLink.download = `image_${randomNumber}.jpg`; // Use the random number in the file name
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+}
+
+// Call the function once to start the process
+downloadAndRepeat();
+
+// Set up a timer to repeat the process after a certain interval (e.g., 10 seconds)
+setInterval(downloadAndRepeat, 5000); // Repeat every 5 seconds
